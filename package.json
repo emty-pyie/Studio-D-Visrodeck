@@ -1,0 +1,41 @@
+{
+  "name": "visrodeck-studio",
+  "version": "1.0.0",
+  "description": "Visrodeck Studio — Desktop IDE",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev":     "concurrently -k -n VITE,ELECTRON -c cyan,magenta \"vite\" \"wait-on tcp:5173 && electron .\"",
+    "build":   "vite build && electron-builder",
+    "rebuild": "electron-rebuild -f -w node-pty",
+    "postinstall": "electron-rebuild -f -w node-pty"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.6.0",
+    "@xterm/addon-fit":     "^0.10.0",
+    "@xterm/xterm":         "^5.5.0",
+    "node-pty":             "^1.0.0",
+    "react":                "^18.3.1",
+    "react-dom":            "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.3",
+    "concurrently":         "^9.1.0",
+    "electron":             "^33.2.0",
+    "electron-builder":     "^25.1.7",
+    "electron-rebuild":     "^3.2.9",
+    "vite":                 "^5.4.10",
+    "wait-on":              "^8.0.1"
+  },
+  "build": {
+    "appId":       "com.visrodeck.studio",
+    "productName": "Visrodeck Studio",
+    "asar":        true,
+    "asarUnpack":  ["**/node_modules/node-pty/**"],
+    "directories": { "output": "release" },
+    "files": ["dist/**/*", "electron/**/*", "node_modules/**/*"],
+    "extraResources": [{ "from": "node_modules/node-pty", "to": "node_modules/node-pty" }],
+    "mac":  { "category": "public.app-category.developer-tools", "target": "dmg" },
+    "win":  { "target": "nsis" },
+    "linux":{ "target": "AppImage" }
+  }
+}
