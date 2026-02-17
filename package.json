@@ -1,12 +1,12 @@
 {
   "name": "visrodeck-studio",
-  "version": "1.0.0",
+  "version": "4.0.0",
   "description": "Visrodeck Studio — Desktop IDE",
   "main": "electron/main.js",
   "scripts": {
-    "dev":     "concurrently -k -n VITE,ELECTRON -c cyan,magenta \"vite\" \"wait-on tcp:5173 && electron .\"",
-    "build":   "vite build && electron-builder",
-    "rebuild": "electron-rebuild -f -w node-pty",
+    "dev":         "concurrently -k -n VITE,ELECTRON -c cyan,magenta \"vite\" \"wait-on tcp:5173 && electron .\"",
+    "build":       "vite build && electron-builder",
+    "rebuild":     "electron-rebuild -f -w node-pty",
     "postinstall": "electron-rebuild -f -w node-pty"
   },
   "dependencies": {
@@ -27,15 +27,14 @@
     "wait-on":              "^8.0.1"
   },
   "build": {
-    "appId":       "com.visrodeck.studio",
-    "productName": "Visrodeck Studio",
-    "asar":        true,
-    "asarUnpack":  ["**/node_modules/node-pty/**"],
-    "directories": { "output": "release" },
-    "files": ["dist/**/*", "electron/**/*", "node_modules/**/*"],
-    "extraResources": [{ "from": "node_modules/node-pty", "to": "node_modules/node-pty" }],
-    "mac":  { "category": "public.app-category.developer-tools", "target": "dmg" },
-    "win":  { "target": "nsis" },
-    "linux":{ "target": "AppImage" }
+    "appId":      "com.visrodeck.studio",
+    "productName":"Visrodeck Studio",
+    "asar":       true,
+    "asarUnpack": ["**/node_modules/node-pty/**"],
+    "directories":{ "output": "release" },
+    "files":      ["dist/**/*", "electron/**/*", "node_modules/**/*"],
+    "mac":        { "category": "public.app-category.developer-tools", "target": "dmg" },
+    "win":        { "target": "nsis" },
+    "linux":      { "target": "AppImage" }
   }
 }
