@@ -1,4 +1,4 @@
-// electron/preload.js
+// electron/preload.js — Phase 4
 const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("studio", {
@@ -43,6 +43,10 @@ contextBridge.exposeInMainWorld("studio", {
       ipcRenderer.on("pty:exit", h);
       return () => ipcRenderer.removeListener("pty:exit", h);
     },
+  },
+  jane: {
+    ask: (system, userMsg, history) =>
+      ipcRenderer.invoke("jane:ask", { system, userMsg, history }),
   },
   shell: { open: (p) => ipcRenderer.send("shell:open", p) },
 });
